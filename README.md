@@ -1,15 +1,17 @@
 <div align="center">
 
-# WebUI Rust
+![Logo](https://raw.githubusercontent.com/webui-dev/webui-logo/main/webui_rust.png)
+
+# Rust-WebUI
 
 [last-commit]: https://img.shields.io/github/last-commit/webui-dev/rust-webui?style=for-the-badge&logo=github&logoColor=C0CAF5&labelColor=414868
 [license]: https://img.shields.io/github/license/webui-dev/rust-webui?style=for-the-badge&logo=opensourcehardware&label=License&logoColor=C0CAF5&labelColor=414868&color=8c73cc
 [![][last-commit]](https://github.com/webui-dev/rust-webui/pulse)
 [![][license]](https://github.com/webui-dev/rust-webui/blob/main/LICENSE)
 
-> WebUI is not a web-server solution or a framework, but it allows you to use any web browser as a GUI, with your preferred language in the backend and HTML5 in the frontend. All in a lightweight portable lib.
+> Use any web browser or WebView as GUI, with Rust in the backend and modern web technologies in the frontend, all in a lightweight portable library.
 
-![Screenshot](https://github.com/webui-dev/webui/assets/34311583/57992ef1-4f7f-4d60-8045-7b07df4088c6)
+![Screenshot](https://raw.githubusercontent.com/webui-dev/webui-logo/main/screenshot.png)
 
 </div>
 
@@ -86,7 +88,7 @@ Think of WebUI like a WebView controller, but instead of embedding the WebView c
 
 ### Runtime Dependencies Comparison
 
-|                                 | WebView           | Qt                         | WebUI               |
+|                                 | Tauri / WebView   | Qt                         | WebUI               |
 | ------------------------------- | ----------------- | -------------------------- | ------------------- |
 | Runtime Dependencies on Windows | _WebView2_        | _QtCore, QtGui, QtWidgets_ | **_A Web Browser_** |
 | Runtime Dependencies on Linux   | _GTK3, WebKitGTK_ | _QtCore, QtGui, QtWidgets_ | **_A Web Browser_** |
