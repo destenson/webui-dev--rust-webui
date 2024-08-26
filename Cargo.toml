@@ -1,8 +1,36 @@
-[package]
+[workspace]
 name = "webui-rs"
-version = "0.1.0"
-build = "build.rs"
+resolver = "1"
+package.version = "0.1.0"
 edition = "2021"
+members = [
+    "crates/webui-sys",
+    "crates/webui",
+]
 
-[dependencies]
-lazy_static = "1.4.0"
+[workspace.dependencies]
+webui-sys = { path = "crates/webui-sys" }
+
+# [[example]]
+# name = "call_js_from_rust"
+# path = "examples/call_js_from_rust.rs"
+
+# [[example]]
+# name = "call_rust_from_js"
+# path = "examples/call_rust_from_js.rs"
+
+# [[example]]
+# name = "direct_binding"
+# path = "examples/direct_binding.rs"
+
+# [[example]]
+# name = "hello_world"
+# path = "examples/hello_world.rs"
+
+# [[example]]
+# name = "serve_a_file"
+# path = "examples/serve_a_file.rs"
+
+# [[example]]
+# name = "mmtx-ctrl"
+# path = "examples/mmtx-ctrl.rs"

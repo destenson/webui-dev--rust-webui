@@ -1,4 +1,4 @@
-use webui_rs::webui::{wait, Window};
+use webui::webui::{wait, Window};
 
 fn main() {
     let win = Window::new();

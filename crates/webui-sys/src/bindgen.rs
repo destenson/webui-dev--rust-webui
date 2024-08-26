@@ -126,14 +126,14 @@ extern "C" {
     #[doc = " @brief Set a window in hidden mode. Should be called before `webui_show()`.\n\n @param window The window number\n @param status The status: True or False\n\n @example webui_set_hide(myWindow, True);"]
     pub fn webui_set_hide(window: usize, status: bool);
 }
-extern "C" {
-    #[doc = " @brief Set the window size.\n\n @param window The window number\n @param width The window width\n @param height The window height\n\n @example webui_set_size(myWindow, 800, 600);"]
-    pub fn webui_set_size(
-        window: usize,
-        width: ::std::os::raw::c_uint,
-        height: ::std::os::raw::c_uint,
-    );
-}
+// extern "C" {
+//     #[doc = " @brief Set the window size.\n\n @param window The window number\n @param width The window width\n @param height The window height\n\n @example webui_set_size(myWindow, 800, 600);"]
+//     pub fn webui_set_size(
+//         window: usize,
+//         width: ::std::os::raw::c_uint,
+//         height: ::std::os::raw::c_uint,
+//     );
+// }
 extern "C" {
     #[doc = " @brief Set the window position.\n\n @param window The window number\n @param x The window X\n @param y The window Y\n\n @example webui_set_position(myWindow, 100, 100);"]
     pub fn webui_set_position(window: usize, x: ::std::os::raw::c_uint, y: ::std::os::raw::c_uint);
@@ -314,3 +314,7 @@ extern "C" {
     #[doc = " @brief Get the size in bytes of an argument at a specific index\n\n @param window The window number\n @param event_number The event number\n @param index The argument position\n\n @return Returns size in bytes\n\n @example size_t argLen = webui_interface_get_size_at(myWindow, e->event_number, 0);"]
     pub fn webui_interface_get_size_at(window: usize, event_number: usize, index: usize) -> usize;
 }
+
+pub mod bindings;
+
+pub use bindings::*;

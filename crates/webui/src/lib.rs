@@ -1,4 +1,4 @@
-pub mod webui;
+pub use webui_sys as webui;
 
 #[cfg(test)]
 mod tests {

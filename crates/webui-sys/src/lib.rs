@@ -127,6 +127,22 @@ impl Event {
     }
 }
 
+#[derive(Debug)]
+pub struct Size {
+    pub width: u32,
+    pub height: u32,
+}
+impl std::fmt::Display for Size {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{}x{}", self.width, self.height)
+    }
+}
+
+pub struct Position {
+    pub x: u32,
+    pub y: u32,
+}
+
 pub struct Window {
     pub id: usize,
 }
@@ -174,6 +190,17 @@ impl Window {
         run_js(self.id, &mut js);
 
         js
+    }
+
+    pub fn get_size(&self) -> Size {
+        get_size(self.id)
+    }
+    pub fn set_size(&self, size: Size) {
+        set_size(self.id, size.width, size.height);
+    }
+
+    pub fn set_position(&self, position: Position) {
+        set_position(self.id, position.x, position.y);
     }
 
     pub fn set_icon(&self, icon: impl AsRef<str>, kind: impl AsRef<str>) {
@@ -348,6 +375,28 @@ pub fn show_browser(
 
 pub fn is_shown(win: usize) -> bool {
     unsafe { webui_is_shown(win) }
+}
+
+// pub fn get_size(win: usize) -> Size {
+//     let mut width: u32 = 0;
+//     let mut height: u32 = 0;
+//     unsafe {
+//         webui_get_size(win, &mut width, &mut height);
+//     }
+//     Size { width, height }
+// }
+
+pub fn set_size(win: usize, width: u32, height: u32) {
+    use bindgen::bindings;
+    unsafe {
+        bindings::webui_set_size(win, width, height);
+    }
+}
+
+pub fn set_position(win: usize, x: u32, y: u32) {
+    unsafe {
+        webui_set_position(win, x, y);
+    }
 }
 
 pub fn set_icon(win: usize, icon: &str, kind: &str) {

@@ -1,0 +1,9 @@
+[package]
+name = "webui"
+version.workspace = true
+edition = "2021"
+description = "Web UI for Rust"
+
+[dependencies]
+webui-sys.workspace = true
+# mediamtx-sys = { path = "../mediamtx-sys" }

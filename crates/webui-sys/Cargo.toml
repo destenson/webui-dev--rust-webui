@@ -1,0 +1,12 @@
+[package]
+name = "webui-sys"
+version = "0.1.0"
+edition = "2021"
+description = "Rust bindings for webui"
+build = "build.rs"
+
+[dependencies]
+lazy_static = "1.5"
+
+[build-dependencies]
+bindgen = "0.70"

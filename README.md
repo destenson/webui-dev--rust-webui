@@ -47,7 +47,7 @@ Examples are found in `examples/` and can be run with `cargo run --example <exam
 ## Usage
 
 ```rust
-use webui_rs::webui;
+use webui::webui;
 
 pub fn main() {
   let win = webui::Window::new();
