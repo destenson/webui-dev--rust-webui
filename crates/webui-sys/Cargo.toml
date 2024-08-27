@@ -7,9 +7,11 @@ build = "build.rs"
 homepage = "https://github.com/webui-dev/webui"
 
 [dependencies]
+cc = "1"
 lazy_static = "1.5"
 
 [build-dependencies]
+cc = "1"
 bindgen = "0.70"
 lazy_static = "1.5"
 reqwest = { version="0.12", features=["blocking"] }
