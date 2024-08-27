@@ -1,0 +1,9 @@
+[build]
+rustc-wrapper = "sccache"
+rustflags = [
+    "-C", "target-cpu=native",
+    # "-L", "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\vc\\lib",
+]
+
+[build-dependencies]
+# chromex-wasm = { path = "gai-rs/crates/chromex-wasm", artifact = "bin", target = "wasm-unknown-unknown" }

@@ -5,7 +5,7 @@ edition = "2021"
 description = "Web UI for Rust"
 
 [dependencies]
-webui-sys = { workspace = true, features = ["msvc"] }
+webui-sys = { path = "../webui-sys", default-features = false}
 # mediamtx-sys = { path = "../mediamtx-sys" }
 
 [features]
@@ -14,3 +14,7 @@ clang = ["webui-sys/clang"]
 gcc = ["webui-sys/gcc"]
 msvc = ["webui-sys/msvc"]
 src = ["webui-sys/src"]
+runtime = ["webui-sys/runtime"] # use shared library
+dylib = ["webui-sys/dylib"] # maybe useful for wasm
+cplusplus = ["webui-sys/cplusplus"]
+docs-rs = ["webui-sys/docs-rs"]

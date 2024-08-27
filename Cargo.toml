@@ -6,11 +6,12 @@ edition = "2021"
 members = [
     "crates/webui-sys",
     "crates/webui",
+    "crates/demo",
 ]
 
-[workspace.dependencies]
-# webui-sys = { path = "crates/webui-sys" }
-webui-sys = { path = "crates/webui-sys", default-features = false }
+# [workspace.dependencies]
+# # webui-sys = { path = "crates/webui-sys" }
+# webui-sys = { path = "crates/webui-sys", default-features = false }
 
 # [[example]]
 # name = "call_js_from_rust"

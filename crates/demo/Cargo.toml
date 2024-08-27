@@ -1,0 +1,7 @@
+[package]
+name = "demo"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+webui = { path = "../webui", default-features = false, features = ["msvc"] }
