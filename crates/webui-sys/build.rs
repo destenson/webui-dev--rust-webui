@@ -147,14 +147,14 @@ fn main() {
         println!("cargo:rustc-link-lib=shell32");
         println!("cargo:rustc-link-lib=advapi32");
         println!("cargo:rustc-link-lib=ole32");
-        if cfg!(feature = "msvc") {
-            println!("cargo:warning=Using msvc feature");
-            // if debug use debug version
-            #[cfg(debug_assertions)]
-            println!("cargo:rustc-link-lib=msvcrtd");
-            #[cfg(not(debug_assertions))]
-            println!("cargo:rustc-link-lib=msvcrt");
-        }
+        // if cfg!(feature = "msvc") {
+        //     println!("cargo:warning=Using msvc feature");
+        //     // if debug use debug version
+        //     #[cfg(debug_assertions)]
+        //     println!("cargo:rustc-link-lib=msvcrtd");
+        //     #[cfg(not(debug_assertions))]
+        //     println!("cargo:rustc-link-lib=msvcrt");
+        // }
     } else {
         println!("cargo:warning=Using runtime feature");
     }

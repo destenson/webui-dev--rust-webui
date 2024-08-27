@@ -1,3 +1,5 @@
+
+#[doc = "WebUI Rust bindings"]
 pub use webui_sys as webui;
 
 #[cfg(test)]

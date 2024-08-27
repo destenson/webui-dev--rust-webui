@@ -1687,6 +1687,7 @@ name = "webui-sys"
 version = "2.4.2"
 dependencies = [
  "bindgen",
+ "cc",
  "lazy_static",
  "reqwest",
  "zip",

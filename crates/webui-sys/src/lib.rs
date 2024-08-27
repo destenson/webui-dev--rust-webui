@@ -1,11 +1,11 @@
 /*
-  WebUI Library 2.2.0
-  http://_webui_core.me
-  https://github.com/alifcommunity/webui
-  Copyright (c) 2020-2023 Hassan Draga.
-  Licensed under GNU General Public License v2.0.
-  All rights reserved.
-  Canada.
+WebUI Library 2.2.0
+http://_webui_core.me
+https://github.com/alifcommunity/webui
+Copyright (c) 2020-2023 Hassan Draga.
+Licensed under GNU General Public License v2.0.
+All rights reserved.
+Canada.
 */
 
 // Flags
@@ -387,6 +387,7 @@ pub fn is_shown(win: usize) -> bool {
 //     Size { width, height }
 // }
 
+// #[doc(hidden)]
 pub fn set_size(win: usize, width: u32, height: u32) {
     // use bindgen::bindings;
     unsafe {
