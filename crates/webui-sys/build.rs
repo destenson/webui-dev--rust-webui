@@ -22,8 +22,8 @@ lazy_static::lazy_static! {
 #[derive(Debug)]
 enum Error {
     Io(std::io::Error),
-    Reqwest(reqwest::Error),
-    Env(env::VarError),
+    // Reqwest(reqwest::Error),
+    // Env(env::VarError),
     Bindgen(bindgen::BindgenError),
     Unknown(String),
 }
@@ -32,8 +32,8 @@ impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
             Error::Io(e) => write!(f, "IO error: {}", e),
-            Error::Reqwest(e) => write!(f, "Reqwest error: {}", e),
-            Error::Env(e) => write!(f, "Env error: {}", e),
+            // Error::Reqwest(e) => write!(f, "Reqwest error: {}", e),
+            // Error::Env(e) => write!(f, "Env error: {}", e),
             Error::Bindgen(e) => write!(f, "Bindgen error: {}", e),
             Error::Unknown(e) => write!(f, "Unknown error: {}", e),
         }
@@ -70,17 +70,21 @@ where
     Ok(())
 }
 
-fn is_dynamic() -> bool {
-    return cfg!(feature = "dylib");
-}
+// fn is_dynamic() -> bool {
+//     return cfg!(feature = "dylib");
+// }
 
 
 fn get_env_var(var: &str) -> Result<String, env::VarError> {
     println!("{}{}", "cargo:rerun-if-env-changed=", var);
-    return env::var(var);
+    env::var(var)
 }
 
 fn download_file(url: &str, output_path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    if Path::new(output_path).exists() {
+        println!("cargo:warning=Already downloaded webui library at {}", output_path);
+        return Ok(());
+    }
     let response = get(url)?;
     let mut dest = File::create(output_path)?;
     dest.write_all(&response.bytes()?)?;
@@ -107,14 +111,17 @@ fn main() {
     println!("cargo:rerun-if-env-changed={}", BINDINGS_TARGET_PATH.display());
 
     if cfg!(feature = "docs-rs") {
+        println!("cargo:warning=Using docs-rs feature");
         return;
     }
     // build from source by default
-    if cfg!(feature = "runtime") {
-        // build_runtime()?;
-    } else {
-        // build_from_source()?;
-    }
+    // if cfg!(feature = "runtime") {
+    //     println!("cargo:warning=Using runtime feature");
+    //     // build_runtime()?;
+    // } else {
+    //     println!("cargo:warning=Not using runtime feature");
+    //     // build_from_source()?;
+    // }
     // Ok(())
 
     // // WebUI static lib
@@ -129,15 +136,27 @@ fn main() {
     //     println!("cargo:rustc-link-search=native={}", current_dir.display());
     // }
 
-    if ! cfg!(feature = "runtime") {
+    if cfg!(not(feature = "runtime")) {
         println!("cargo:rustc-link-lib=webui-2-static");
+    } else {
+        println!("cargo:warning=Not using runtime feature");
     }
 
-    if !(cfg!(feature = "runtime")) && (cfg!(target_os = "windows")) {
+    if (cfg!(not(feature = "runtime"))) && (cfg!(target_os = "windows")) {
         println!("cargo:rustc-link-lib=user32");
         println!("cargo:rustc-link-lib=shell32");
         println!("cargo:rustc-link-lib=advapi32");
         println!("cargo:rustc-link-lib=ole32");
+        if cfg!(feature = "msvc") {
+            println!("cargo:warning=Using msvc feature");
+            // if debug use debug version
+            #[cfg(debug_assertions)]
+            println!("cargo:rustc-link-lib=msvcrtd");
+            #[cfg(not(debug_assertions))]
+            println!("cargo:rustc-link-lib=msvcrt");
+        }
+    } else {
+        println!("cargo:warning=Using runtime feature");
     }
 
     let out_dir = get_env_var("OUT_DIR").unwrap();
@@ -191,16 +210,16 @@ fn download_or_find_webui_root(out_dir: &str) -> String {
             let output_dir = format!("{}/../../../../", out_dir);
             let output_path = format!("{}{}-{}", &output_dir, version, url.split("/").last().unwrap());
             if !Path::new(&output_path).exists() {
+                println!("cargo:warning=Downloading webui library from {}", url);
+
                 download_file(&url, &output_path).expect(&format!("Failed to download webui {} library", version));
-                panic!("Downloaded webui library from {}", url);
+
+                println!("cargo:warning=Downloaded webui library from {}", url);
             }
 
-            #[cfg(debug_assertions)]
-            println!("cargo:warning=Downloaded webui library from {}", url);
-
-            let fname = std::path::Path::new(&output_path);
+            let fname = Path::new(&output_path);
             assert!(fname.exists());
-            let file = std::fs::File::open(&fname).expect("Failed to open downloaded file");
+            let file = File::open(&fname).expect("Failed to open downloaded file");
             
             // Extract the zip file
             let mut zf = zip::ZipArchive::new(file).expect("Failed to open zip file");

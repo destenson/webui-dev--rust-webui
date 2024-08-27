@@ -192,9 +192,9 @@ impl Window {
         js
     }
 
-    pub fn get_size(&self) -> Size {
-        get_size(self.id)
-    }
+    // pub fn get_size(&self) -> Size {
+    //     get_size(self.id)
+    // }
     pub fn set_size(&self, size: Size) {
         set_size(self.id, size.width, size.height);
     }
@@ -387,9 +387,9 @@ pub fn is_shown(win: usize) -> bool {
 // }
 
 pub fn set_size(win: usize, width: u32, height: u32) {
-    use bindgen::bindings;
+    // use bindgen::bindings;
     unsafe {
-        bindings::webui_set_size(win, width, height);
+        webui_set_size(win, width, height);
     }
 }
 

@@ -5,5 +5,5 @@ edition = "2021"
 description = "Web UI for Rust"
 
 [dependencies]
-webui-sys.workspace = true
+webui-sys = { workspace = true, features = ["msvc"] }
 # mediamtx-sys = { path = "../mediamtx-sys" }
