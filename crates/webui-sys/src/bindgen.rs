@@ -1,13 +1,19 @@
-// Event struct
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct webui_event_t {
-    pub window: *mut ::std::os::raw::c_void,
-    pub type_: ::std::os::raw::c_uint,
-    pub element: *mut ::std::os::raw::c_char,
-    pub data: *mut ::std::os::raw::c_char,
-    pub response: *mut ::std::os::raw::c_char,
-}
+#![allow(non_upper_case_globals)]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+
+include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+
+// // Event struct
+// #[repr(C)]
+// #[derive(Debug, Copy, Clone)]
+// pub struct webui_event_t {
+//     pub window: *mut ::std::os::raw::c_void,
+//     pub type_: ::std::os::raw::c_uint,
+//     pub element: *mut ::std::os::raw::c_char,
+//     pub data: *mut ::std::os::raw::c_char,
+//     pub response: *mut ::std::os::raw::c_char,
+// }
 
 extern "C" {
     #[doc = " @brief Create a new WebUI window object.\n\n @return Returns the window number.\n\n @example size_t myWindow = webui_new_window();"]
@@ -315,6 +321,8 @@ extern "C" {
     pub fn webui_interface_get_size_at(window: usize, event_number: usize, index: usize) -> usize;
 }
 
-pub mod bindings;
+// // include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+// #[path = &concat!(env!("OUT_DIR", "/bindings.rs"))]
+// pub mod bindings;
 
-pub use bindings::*;
+// pub use bindings::*;
