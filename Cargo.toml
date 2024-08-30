@@ -9,9 +9,8 @@ members = [
     "crates/demo",
 ]
 
-# [workspace.dependencies]
-# # webui-sys = { path = "crates/webui-sys" }
-# webui-sys = { path = "crates/webui-sys", default-features = false }
+[workspace.dependencies]
+webui-sys = { path = "crates/webui-sys" }
 
 # [[example]]
 # name = "call_js_from_rust"
@@ -27,7 +26,7 @@ members = [
 
 # [[example]]
 # name = "hello_world"
-# path = "examples/hello_world.rs"
+# path = "examples/hello_world_sys"
 
 # [[example]]
 # name = "serve_a_file"

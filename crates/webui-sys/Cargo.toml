@@ -7,38 +7,29 @@ build = "build.rs"
 homepage = "https://github.com/webui-dev/webui"
 
 [dependencies]
-cc = "1"
 lazy_static = "1.5"
 
 [build-dependencies]
-cc = {version = "1" }
 bindgen = "0.70"
 lazy_static = "1.5"
 reqwest = { version="0.12", features=["blocking"] }
 zip = "2"
 
 [features]
-default = [
-    "buildtime-bindgen",
-    # "runtime",
-    # "dylib",
-    # "cplusplus",
-    # "gcc",
-    # "clang",
-    # "msvc",
-    # "src",
-    # "docs-rs",
-]
+#default = []
+default = ["runtime", "buildtime-bindgen"]
+#default = ["runtime"]
+#default = ["buildtime-bindgen"]
 buildtime-bindgen = [] # generate bindings at build time
 cplusplus = ["dylib","runtime"]
 runtime = [] # use shared library
 dylib = []
 clang = []
-gcc = []
-msvc = []
 src = []
 docs-rs = []
 
+[package.metadata.docs.rs]
+features = ["docs-rs"]
 
-# ["package.metadata.docs.rs"]
-# features = ["docs-rs"]
+[build]
+rustflags = ["-C", "target-feature=+crt-static"]

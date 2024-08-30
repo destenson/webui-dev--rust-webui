@@ -1,11 +1,11 @@
 /*
-WebUI Library 2.2.0
-http://_webui_core.me
-https://github.com/alifcommunity/webui
-Copyright (c) 2020-2023 Hassan Draga.
-Licensed under GNU General Public License v2.0.
-All rights reserved.
-Canada.
+  WebUI Library 2.2.0
+  http://_webui_core.me
+  https://github.com/alifcommunity/webui
+  Copyright (c) 2020-2023 Hassan Draga.
+  Licensed under GNU General Public License v2.0.
+  All rights reserved.
+  Canada.
 */
 
 // Flags
@@ -13,40 +13,13 @@ Canada.
 #![allow(dead_code)]
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
-#![allow(non_snake_case)]
-
-// #[cfg(feature = "buildtime-bindgen")]
-// compile_error!("buildtime-bindgen feature is not supported yet");
-
-#[cfg(feature = "cplusplus")]
-compile_error!("cplusplus feature is not supported yet");
-
-#[cfg(feature = "runtime")]
-compile_error!("runtime feature is not supported yet");
-
-#[cfg(feature = "dylib")]
-compile_error!("dylib feature is not supported yet");
-
-#[cfg(feature = "clang")]
-compile_error!("clang feature is not supported yet");
-
-#[cfg(feature = "gcc")]
-compile_error!("gcc feature is not supported yet");
-
-// #[cfg(feature = "msvc")]
-// compile_error!("msvc feature is not supported yet");
-
-#[cfg(feature = "src")]
-compile_error!("src feature is not supported yet");
-
-#[cfg(feature = "docs-rs")]
-compile_error!("docs-rs feature is not supported yet");
-
 
 #[cfg(feature = "buildtime-bindgen")]
-pub mod bindgen {
+pub mod buildtime_bindgen {
     include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 }
+#[cfg(feature = "buildtime-bindgen")]
+pub use buildtime_bindgen as bindgen;
 
 #[cfg(not(feature = "buildtime-bindgen"))]
 pub mod bindgen;
@@ -57,8 +30,7 @@ use std::ffi::CStr;
 use std::ffi::CString;
 use std::os::raw::c_char;
 
-pub use bindgen::*;
-
+use bindgen::*;
 use lazy_static::lazy_static;
 use std::sync::{Mutex, MutexGuard};
 
@@ -422,7 +394,6 @@ pub fn is_shown(win: usize) -> bool {
 //     Size { width, height }
 // }
 
-// #[doc(hidden)]
 pub fn set_size(win: usize, width: u32, height: u32) {
     // use bindgen::bindings;
     unsafe {
