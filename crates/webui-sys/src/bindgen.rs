@@ -351,11 +351,11 @@ extern "C" {
     pub fn _strdup(s: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;
 }
 
-extern "C" {
-    pub fn strdup(s: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char {
-        unsafe { _strdup(s) }
-    }
-}
+// extern "C" {
+//     pub fn strdup(s: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char {
+//         unsafe { _strdup(s) }
+//     }
+// }
 
 // include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 // #[path = &concat!(env!("OUT_DIR", "/bindings.rs"))]

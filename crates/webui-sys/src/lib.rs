@@ -135,7 +135,7 @@ impl Event {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 pub struct Size {
     pub width: u32,
     pub height: u32,
@@ -167,6 +167,19 @@ impl Window {
         Window { id }
     }
 
+    pub fn new_with_size(size: Size) -> Window {
+        let id = new_window();
+        set_size(id, size.width, size.height);
+        Window { id }
+    }
+
+    pub fn new_with_size_and_position(size: Size, position: Position) -> Window {
+        let id = new_window();
+        set_size(id, size.width, size.height);
+        set_position(id, position.x, position.y);
+        Window { id }
+    }
+
     pub fn from_id(id: usize) -> Window {
         Window { id }
     }
@@ -175,7 +188,29 @@ impl Window {
         show(self.id, content.as_ref())
     }
 
+    pub fn show_with_size(&self, content: impl AsRef<str>, size: Size) -> bool {
+        set_size(self.id, size.width, size.height);
+        show(self.id, content.as_ref())
+    }
+
+    pub fn show_with_size_and_position(&self, content: impl AsRef<str>, size: Size, position: Position) -> bool {
+        set_size(self.id, size.width, size.height);
+        set_position(self.id, position.x, position.y);
+        show(self.id, content.as_ref())
+    }
+
     pub fn show_browser(&self, content: impl AsRef<str>, browser: WebUIBrowser) -> bool {
+        show_browser(self.id, content.as_ref(), browser)
+    }
+
+    pub fn show_browser_with_size(&self, content: impl AsRef<str>, browser: WebUIBrowser, size: Size) -> bool {
+        set_size(self.id, size.width, size.height);
+        show_browser(self.id, content.as_ref(), browser)
+    }
+
+    pub fn show_browser_with_size_and_position(&self, content: impl AsRef<str>, browser: WebUIBrowser, size: Size, position: Position) -> bool {
+        set_size(self.id, size.width, size.height);
+        set_position(self.id, position.x, position.y);
         show_browser(self.id, content.as_ref(), browser)
     }
 

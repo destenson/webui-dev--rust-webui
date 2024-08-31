@@ -7,3 +7,6 @@ rustflags = [
 
 [build-dependencies]
 # chromex-wasm = { path = "gai-rs/crates/chromex-wasm", artifact = "bin", target = "wasm-unknown-unknown" }
+
+[env]
+CARGO_WORKSPACE_DIR = { value = "", relative = true }
